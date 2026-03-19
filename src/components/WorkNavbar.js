@@ -1,7 +1,7 @@
 'use client'
 
-import { ThemeProvider } from '../../context/ThemeContext'
-import Navbar from '../Navbar'
+import { ThemeProvider } from '../context/ThemeContext'
+import Navbar from './Navbar'
 
 /**
  * WorkNavbar — a thin client wrapper used in the /work Server Component page.

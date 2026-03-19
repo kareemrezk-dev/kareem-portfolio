@@ -118,13 +118,20 @@ function ProjectCard({ project, index, scrollRoot }) {
 }
 
 /* ─── main export ────────────────────────────────────────── */
-const CATEGORIES = ['All', 'Branding', 'Web Design', 'Digital Marketing']
 
 /**
  * WorkGrid — reusable in both Home Slider and /work page.
  * compact=true → hides search, uses compact featured layout, 3-col grid
  */
 export default function WorkGrid({ projects = [], scrollRoot, compact = false }) {
+  const tagSet = new Set()
+  projects.forEach(p => {
+    if (p.tags && Array.isArray(p.tags)) {
+      p.tags.forEach(t => tagSet.add(t.trim()))
+    }
+  })
+  const CATEGORIES = ['All', ...Array.from(tagSet).sort()]
+
   const [activeFilter, setActiveFilter] = useState('All')
   const [search, setSearch] = useState('')
 
@@ -132,7 +139,7 @@ export default function WorkGrid({ projects = [], scrollRoot, compact = false })
     .filter((p) => {
       const matchCat =
         activeFilter === 'All' ||
-        (p.tags || []).some((t) => t.toLowerCase().includes(activeFilter.toLowerCase()))
+        (p.tags || []).some((t) => t.toLowerCase() === activeFilter.toLowerCase())
       const matchSearch =
         search === '' || p.title.toLowerCase().includes(search.toLowerCase())
       return matchCat && matchSearch
@@ -141,7 +148,7 @@ export default function WorkGrid({ projects = [], scrollRoot, compact = false })
 
   const counts = CATEGORIES.slice(1).reduce((acc, cat) => {
     acc[cat] = projects.filter((p) =>
-      (p.tags || []).some((t) => t.toLowerCase().includes(cat.toLowerCase()))
+      (p.tags || []).some((t) => t.toLowerCase() === cat.toLowerCase())
     ).length
     return acc
   }, {})

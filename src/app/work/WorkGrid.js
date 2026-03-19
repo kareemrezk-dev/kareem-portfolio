@@ -140,9 +140,16 @@ function ProjectCard({ project, index }) {
 }
 
 /* ─── main export ────────────────────────────────────────── */
-const CATEGORIES = ['All', 'Branding', 'Web Design', 'Digital Marketing']
 
 export default function WorkGrid({ projects = [] }) {
+  const tagSet = new Set()
+  projects.forEach(p => {
+    if (p.tags && Array.isArray(p.tags)) {
+      p.tags.forEach(t => tagSet.add(t.trim()))
+    }
+  })
+  const CATEGORIES = ['All', ...Array.from(tagSet).sort()]
+
   const [activeFilter, setActiveFilter] = useState('All')
   const [search, setSearch] = useState('')
 
@@ -152,7 +159,7 @@ export default function WorkGrid({ projects = [] }) {
       const matchCat =
         activeFilter === 'All' ||
         (p.tags || []).some((t) =>
-          t.toLowerCase().includes(activeFilter.toLowerCase())
+          t.toLowerCase() === activeFilter.toLowerCase()
         )
       const matchSearch =
         search === '' ||
@@ -164,7 +171,7 @@ export default function WorkGrid({ projects = [] }) {
   /* counts per category */
   const counts = CATEGORIES.slice(1).reduce((acc, cat) => {
     acc[cat] = projects.filter((p) =>
-      (p.tags || []).some((t) => t.toLowerCase().includes(cat.toLowerCase()))
+      (p.tags || []).some((t) => t.toLowerCase() === cat.toLowerCase())
     ).length
     return acc
   }, {})

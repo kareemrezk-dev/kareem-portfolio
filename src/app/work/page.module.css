@@ -530,7 +530,7 @@
 .emptyState {
   text-align: center;
   padding: 80px 0;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-muted, rgba(255, 255, 255, 0.4));
   font-size: 1rem;
   letter-spacing: 0.05em;
 }

@@ -35,6 +35,12 @@ export default function Hero({ isActive, onNext }) {
 
   return (
     <div className={`${styles.slide} ${isActive ? styles.active : ''} ${isLight ? styles.slideLight : ''}`}>
+      {/* Mobile Background Orbs */}
+      <div className={styles.mobileOrbs}>
+        <div className={styles.orb1} />
+        <div className={styles.orb2} />
+        <div className={styles.orb3} />
+      </div>
       {/* Ripple Animation Container */}
       {ripples.map(r => (
         <div key={r.id} className={styles.rippleContainer}>

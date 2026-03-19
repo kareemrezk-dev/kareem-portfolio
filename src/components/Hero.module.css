@@ -1,0 +1,185 @@
+.slide {
+  width: 25%; height: 100%;
+  position: relative; overflow: hidden; flex-shrink: 0;
+  background: #000000;
+  transition: background 0.3s ease;
+}
+
+.slideLight {
+  background: #e3dbc8;
+}
+
+/* Water Ripple Drop Effect (Theme Toggle) */
+.rippleContainer {
+  position: absolute;
+  top: 50%; /* Middle of the image */
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.rippleRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 20px var(--gold), inset 0 0 20px var(--gold);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  animation: waterRipple 4.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes waterRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.35;
+    border-width: 6px;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(160);
+    opacity: 0;
+    border-width: 0px;
+  }
+}
+.imgWrap {
+  position: absolute; inset: 0;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+  z-index: 2; /* Keeps the images in front of the background wipe */
+}
+.imgWrapHidden {
+  opacity: 0;
+}
+.img {
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0.95) contrast(1.05);
+}
+.imgLight {
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0.97) contrast(1.03);
+}
+.overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,0.5) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.5) 100%),
+    linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 15%, transparent 75%, rgba(0,0,0,0.6) 100%);
+}
+.overlayLight {
+  background:
+    linear-gradient(to right, rgba(227,219,200,0.45) 0%, transparent 20%, transparent 80%, rgba(227,219,200,0.45) 100%),
+    linear-gradient(to bottom, rgba(227,219,200,0.15) 0%, transparent 15%, transparent 75%, rgba(227,219,200,0.6) 100%);
+}
+.content {
+  position: absolute; top: 50%; left: 0; right: 0;
+  transform: translateY(-20%) translateY(20px);
+  padding: 0 80px; z-index: 3;
+  opacity: 0;
+  transition: opacity 1s 0.1s ease, transform 1s 0.1s ease;
+}
+.active .content { opacity: 1; transform: translateY(-20%) translateY(0); }
+
+.eyebrow {
+  font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent-eyebrow); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.eyebrow::before { content: ""; width: 32px; height: 0.5px; background: var(--accent-line); }
+
+
+
+.name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(72px, 11vw, 130px); font-weight: 200;
+  line-height: 0.88; letter-spacing: -0.02em; color: var(--text);
+}
+.name em { display: block; font-style: italic; color: var(--em-color); }
+
+.bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 24px; }
+.rolesAndBadge { display: flex; flex-direction: column; gap: 24px; }
+.roles { display: flex; flex-direction: column; gap: 8px; }
+.role { font-size: 14px; letter-spacing: 0.05em; color: var(--text-muted); display: flex; align-items: center; gap: 10px; }
+.dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-dot); flex-shrink: 0; }
+
+.btn {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted); cursor: pointer;
+  background: none; border: none; font-family: 'DM Sans', sans-serif;
+  transition: color 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.btn:hover { color: var(--text); transform: scale(1.05); }
+.circle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 0.5px solid var(--circle-border);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.btn:hover .circle { 
+  border-color: var(--text); 
+  transform: translateX(8px) scale(1.1); 
+  background-color: rgba(255,255,255,0.05);
+}
+
+/* Scroll Hint (Horizontal) */
+.scrollHint {
+  position: absolute;
+  bottom: 40px;
+  right: 80px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeInHint 1s ease forwards 1.5s;
+}
+
+@keyframes fadeInHint {
+  to { opacity: 1; }
+}
+
+.scrollLine {
+  width: 60px;
+  height: 1px;
+  background: var(--tag-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.scrollDot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 1px;
+  background: var(--gold);
+  animation: scrollAnim 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes scrollAnim {
+  0% { transform: translateX(-20px); }
+  100% { transform: translateX(65px); }
+}
+
+@media (max-width: 640px) {
+  .scrollHint {
+    right: 32px;
+    bottom: 24px;
+    transform: scale(0.9);
+  }
+  .content { padding: 0 22px 44px; }
+  .name { font-size: 16vw; }
+  .bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .btn { align-self: flex-start; }
+}

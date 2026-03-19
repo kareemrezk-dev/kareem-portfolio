@@ -1,0 +1,38 @@
+.cursorCircle {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--text-muted); /* Adapts to light/dark themes */
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  mix-blend-mode: difference; /* Creates a cool inverse effect on backgrounds */
+  will-change: transform;
+}
+
+.cursorDot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background-color: var(--text);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.1s ease;
+  will-change: transform;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hovering {
+  width: 65px;
+  height: 65px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+  backdrop-filter: blur(2px);
+}

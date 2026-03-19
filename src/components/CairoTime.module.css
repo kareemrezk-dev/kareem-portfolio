@@ -1,0 +1,49 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  margin-top: 0;
+}
+
+.badgeWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.label {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: var(--tag-bg); /* subtle background adaptive to theme */
+  border: 1px solid var(--border);
+}
+
+.time {
+  font-size: 13px;
+  color: var(--time-color); /* The reddish color in the screenshot */
+  font-variant-numeric: tabular-nums; /* ensures the numbers don't jump around */
+}
+
+.zone {
+  font-size: 13px;
+  color: var(--time-color);
+  letter-spacing: 0.05em;
+}

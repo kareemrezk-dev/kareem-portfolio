@@ -1,0 +1,577 @@
+.container {
+  min-height: 100vh;
+  background-color: #050505; /* Modern Dark UI */
+  color: #f0e8dc;
+  padding: 120px 5% 80px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.header {
+  max-width: 800px;
+  margin-bottom: 80px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+}
+
+.filterStrip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 24px;
+  margin-bottom: 48px;
+}
+
+.filterLeft {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.filterLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.searchInput {
+  border: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #fff;
+  outline: none;
+  width: 200px;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.filterSelect {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 4px;
+  background: #111;
+  font-size: 0.9rem;
+  color: #eee;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 80px; /* Space between featured and regular grid */
+}
+
+/* --- FEATURED CARD --- */
+.featuredCard {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 40px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 32px;
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.featuredCard:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(200, 168, 106, 0.2);
+}
+
+.featuredImageContainer {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  background: #111;
+}
+
+.featuredImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.featuredCard:hover .featuredImage {
+  transform: scale(1.04);
+}
+
+.featuredContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.featuredBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c8a86a; /* Gold accent */
+}
+
+.featuredDot {
+  width: 8px;
+  height: 8px;
+  background-color: #c8a86a;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(200, 168, 106, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(200, 168, 106, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(200, 168, 106, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(200, 168, 106, 0); }
+}
+
+.featuredTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 300;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+.featuredCard:hover .featuredTitle {
+  color: #c8a86a;
+}
+
+.featuredDesc {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tagsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.skillTag {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+/* --- REGULAR GRID --- */
+.regularGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.category {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* Adjusted colors for dark theme */
+.catBranding { background-color: rgba(255, 107, 53, 0.1); color: #ff8e66; border: 1px solid rgba(255, 107, 53, 0.2); }
+.catWebDesign { background-color: rgba(0, 168, 107, 0.1); color: #33e5a5; border: 1px solid rgba(0, 168, 107, 0.2); }
+.catMarketing { background-color: rgba(45, 122, 241, 0.1); color: #78a9ff; border: 1px solid rgba(45, 122, 241, 0.2); }
+
+.cardTitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0 0 12px 0;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.card:hover .cardTitle {
+  color: #c8a86a;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.readMore {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: auto;
+  transition: color 0.3s;
+}
+
+.featuredCard:hover .readMore,
+.card:hover .readMore {
+  color: #c8a86a;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.card:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ─── Stats Bar ───────────────────────────────────────────── */
+.statsBar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.06em;
+}
+
+.statItem strong {
+  color: #c8a86a;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.statItem:not(:last-child)::after {
+  content: '·';
+  margin-left: 24px;
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Filter Strip (overrides old layout) ───────────────── */
+.filterStrip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 20px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filterPills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filterPill:hover {
+  border-color: rgba(200, 168, 106, 0.4);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.filterPillActive {
+  background: rgba(200, 168, 106, 0.12);
+  border-color: rgba(200, 168, 106, 0.5);
+  color: #c8a86a;
+}
+
+.pillCount {
+  font-size: 0.7rem;
+  background: rgba(200, 168, 106, 0.2);
+  color: #c8a86a;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.filterRight {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: border-color 0.3s;
+}
+
+.searchWrap:focus-within {
+  border-color: rgba(200, 168, 106, 0.35);
+}
+
+.searchInput {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  color: #fff;
+  outline: none;
+  width: 180px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.searchInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.sortBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.sortBtn:hover {
+  border-color: rgba(200, 168, 106, 0.4);
+  color: #c8a86a;
+}
+
+/* ─── Scroll Reveal ──────────────────────────────────────── */
+.revealCard {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.revealCard.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Masonry Grid ───────────────────────────────────────── */
+.masonryGrid {
+  columns: 3;
+  column-gap: 28px;
+}
+
+.masonryGrid .revealCard {
+  break-inside: avoid;
+  margin-bottom: 28px;
+}
+
+/* ─── Project Number Label ───────────────────────────────── */
+.projectNumber {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(200, 168, 106, 0.18);
+  line-height: 1;
+  margin-bottom: -8px;
+  letter-spacing: -0.02em;
+}
+
+.cardMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.projectNum {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: rgba(200, 168, 106, 0.2);
+  line-height: 1;
+}
+
+/* ─── Custom Cursor Overlay ──────────────────────────────── */
+.cursorArea {
+  position: relative;
+}
+
+.cursorTracker {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: all;
+}
+
+.cursorDot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
+  margin-left: -36px;
+  border-radius: 50%;
+  background: #c8a86a;
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translate(-200px, -200px) scale(0.4);
+  transition: opacity 0.3s ease, transform 0.15s ease;
+  mix-blend-mode: normal;
+}
+
+.cursorDotVisible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ─── Empty State ────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  padding: 80px 0;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .featuredCard {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .featuredImageContainer {
+    aspect-ratio: 16 / 9;
+  }
+  .masonryGrid {
+    columns: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .masonryGrid {
+    columns: 1;
+  }
+  .filterStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .filterRight {
+    width: 100%;
+  }
+  .searchInput {
+    width: 100%;
+  }
+  .featuredTitle {
+    font-size: 2rem;
+  }
+  .cursorDot {
+    display: none; /* Disable custom cursor on touch devices */
+  }
+}
+

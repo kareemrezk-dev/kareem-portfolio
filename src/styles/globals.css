@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #000000;
+  --text: #f0e8dc;
+  --title-color: #f0e8dc;
+  --text-muted: rgba(200,185,160,0.62);
+  --text-dim: rgba(120,110,90,0.45);
+  --border: rgba(255,255,255,0.06);
+  --tag-bg: rgba(200,185,160,0.04);
+  --tag-border: rgba(200,185,160,0.15);
+  --tag-color: rgba(210,195,170,0.7);
+  --card-hover: rgba(200,185,160,0.08);
+  --hud-bg: rgba(0,0,0,0.6);
+  --hud-border: rgba(200,185,160,0.12);
+  --nav-grad: rgba(0,0,0,0.65);
+  --gold: #c8a86a;
+  /* italic em in headings */
+  --em-color: rgba(240,232,220,0.45);
+  /* eyebrow / dot / decorative lines */
+  --accent-line: rgba(180,150,90,0.5);
+  --accent-dot: rgba(180,150,90,0.6);
+  --accent-eyebrow: rgba(180,150,90,0.8);
+  /* circle button border */
+  --circle-border: rgba(200,185,160,0.3);
+  --circle-border-hover: rgba(200,185,160,0.85);
+  /* email underline */
+  --email-border: rgba(200,185,160,0.25);
+  /* time badge color */
+  --time-color: #c8a86a; /* matches --gold */
+  
+  /* Admin Theme */
+  --admin-bg: #080604;
+  --admin-card-bg: rgba(200, 185, 160, 0.02);
+  --admin-border: rgba(200, 185, 160, 0.12);
+  --admin-text: #f0e8dc;
+  --admin-text-muted: rgba(200, 185, 160, 0.45);
+  --admin-accent: #c8a86a;
+  --admin-accent-hover: rgba(200, 168, 106, 0.2);
+  --admin-nav-hover: rgba(200, 185, 160, 0.06);
+  --admin-input-bg: rgba(200, 185, 160, 0.04);
+}
+
+body.light {
+  --bg: #e3dbc8;
+  --gold: #8a6a2a;
+  --text: #1a1410;
+  --title-color: #5c4015; /* Rich dark gold for headings */
+  --text-muted: rgba(50,40,28,0.85); /* Darker for better contrast */
+  --text-dim: rgba(80,68,50,0.6);
+  --border: rgba(0,0,0,0.07);
+  --tag-bg: rgba(50,40,28,0.05);
+  --tag-border: rgba(50,40,28,0.18);
+  --tag-color: rgba(50,40,28,0.68);
+  --card-hover: rgba(138,106,42,0.08);
+  --hud-bg: rgba(227,219,200,0.8);
+  --hud-border: rgba(50,40,28,0.14);
+  --nav-grad: rgba(227,219,200,0.75);
+  /* italic em */
+  --em-color: #8a6a2a; /* Heavy gold to match the light theme accent */
+  /* eyebrow / dot / decorative lines */
+  --accent-line: rgba(140,100,40,0.4);
+  --accent-dot: rgba(140,100,40,0.55);
+  --accent-eyebrow: rgba(120,85,30,0.75);
+  /* circle button border */
+  --circle-border: rgba(50,40,28,0.25);
+  --circle-border-hover: rgba(50,40,28,0.7);
+  /* email underline */
+  --email-border: rgba(50,40,28,0.2);
+  /* time badge color */
+  --time-color: #8a6a2a; /* matches light --gold */
+}
+
+/* Admin Light Theme */
+[data-theme="light"] {
+  --admin-bg: #f9f7f4;
+  --admin-card-bg: #ffffff;
+  --admin-border: rgba(0, 0, 0, 0.1);
+  --admin-text: #1a1a1a;
+  --admin-text-muted: rgba(0, 0, 0, 0.65);
+  --admin-accent: #8a6a2a;
+  --admin-accent-hover: rgba(138, 106, 42, 0.1);
+  --admin-nav-hover: rgba(0, 0, 0, 0.05);
+  --admin-input-bg: #ffffff;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* Global Status Badge */
+.availableBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--tag-bg);
+  color: var(--text-muted);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.availableBadge.large {
+  gap: 10px;
+  padding: 8px 16px;
+  font-size: 13px;
+  width: max-content;
+  margin-bottom: 30px;
+}
+
+.availableBadge.small {
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+
+.pulseDot {
+  width: 8px;
+  height: 8px;
+  background-color: #4ade80;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.pulseDot.small {
+  width: 6px;
+  height: 6px;
+}
+
+.pulseDot::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 1px solid #4ade80;
+  animation: pulseGreen 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pulseDot:not(.small)::after {
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+}
+
+@keyframes pulseGreen {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* Image Protection */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+}
+
+/* ========================================= */
+/* PRINT STYLESHEET                          */
+/* ========================================= */
+@media print {
+  html, body {
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Reset the viewport and wrapper which were forced to 100vh */
+  [class*="wrapper"], [class*="viewport"] {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Unravel the horizontal slider to be a basic vertical block */
+  [class*="slidesWrap"] {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+  }
+
+  /* Make each slide a full-width block that page breaks nicely */
+  [class*="slide"] {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+    page-break-inside: avoid;
+    page-break-after: always;
+    padding: 40px 0 !important;
+  }
+
+  /* Ensure content blocks are static and visible */
+  [class*="content"] {
+    position: static !important;
+    opacity: 1 !important;
+    transform: none !important;
+    padding: 0 40px !important;
+    color: #000 !important;
+  }
+
+  /* Strip UI and interactive elements */
+  nav, [class*="nav"], [class*="Hud"], [class*="Preloader"],
+  button, .btn, [class*="pulseDot"], [class*="imgWrapHidden"], [class*="overlay"] {
+    display: none !important;
+  }
+
+  /* Force WordReveal to be statically visible, not hidden by CSS */
+  [class*="wordContainer"], [class*="word"] {
+    display: inline-block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  /* Hero adjustments for print so it looks like a nice header */
+  [class*="imgWrap"] {
+    position: static !important;
+    height: 350px !important;
+    text-align: center !important;
+  }
+  [class*="imgWrap"] img {
+    position: static !important;
+    max-height: 100% !important;
+    width: auto !important;
+    margin: 0 auto;
+    filter: none !important;
+  }
+
+  /* Typography resets (everything to black/grey) */
+  h1, h2, h3, h4, p, span, div, a {
+    color: #000 !important;
+    text-shadow: none !important;
+    transition: none !important;
+  }
+  
+  /* Show links for print (optional: append the URL after the link text if useful) */
+  a {
+    text-decoration: underline !important;
+  }
+}

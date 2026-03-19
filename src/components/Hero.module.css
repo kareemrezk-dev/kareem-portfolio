@@ -173,13 +173,50 @@
 }
 
 @media (max-width: 640px) {
-  .scrollHint {
-    right: 32px;
-    bottom: 24px;
-    transform: scale(0.9);
+  .imgWrap {
+    display: none !important;
   }
-  .content { padding: 0 22px 44px; }
-  .name { font-size: 16vw; }
-  .bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
-  .btn { align-self: flex-start; }
+  .scrollHint {
+    right: 24px;
+    bottom: 24px;
+    transform: scale(0.85);
+  }
+  .content {
+    padding: 0 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    top: 0;
+    transform: translateY(20px);
+  }
+  .active .content {
+    transform: translateY(0);
+  }
+  .eyebrow {
+    justify-content: center;
+  }
+  .eyebrow::before {
+    display: none;
+  }
+  .name {
+    font-size: 20vw;
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .rolesAndBadge {
+    align-items: center;
+  }
+  .roles {
+    align-items: center;
+  }
+  .btn {
+    align-self: center;
+  }
 }

@@ -54,8 +54,10 @@ export default function Hero({ isActive, onNext }) {
       
       <div className={styles.scrollHint}>
         <span className={styles.scrollText}>Scroll</span>
-        <div className={styles.scrollLine}>
-          <div className={styles.scrollDot} />
+        <div className={styles.scrollArrowWrapper}>
+          <svg width="40" height="12" viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.scrollArrow}>
+            <path d="M0 6H38M38 6L33 1M38 6L33 11" stroke="var(--gold, #C8A86A)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
         </div>
       </div>
 
@@ -69,6 +71,10 @@ export default function Hero({ isActive, onNext }) {
         </div>
         <div className={styles.name}>
           Kareem<em>Rezk</em>
+        </div>
+
+        <div className={styles.subheadline}>
+          I build websites that don&apos;t just look good &mdash; they convert.
         </div>
 
         <div className={styles.bottom}>

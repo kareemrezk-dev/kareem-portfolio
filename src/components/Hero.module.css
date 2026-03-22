@@ -100,9 +100,24 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(72px, 12vw, 150px); font-weight: 200;
   line-height: 0.88; letter-spacing: -0.02em; color: var(--text);
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 }
 .name em { display: block; font-style: italic; color: var(--em-color); }
+
+.subheadline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  max-width: 650px;
+  line-height: 1.4;
+  margin-top: -12px;
+  margin-bottom: 48px;
+  text-align: center;
+  opacity: 0.85;
+}
 
 .bottom { display: flex; flex-direction: column; align-items: center; margin-top: 24px; gap: 24px; }
 .rolesAndBadge { display: flex; flex-direction: column; align-items: center; gap: 24px; }
@@ -152,27 +167,20 @@
   to { opacity: 1; }
 }
 
-.scrollLine {
-  width: 60px;
-  height: 1px;
-  background: var(--tag-border);
-  position: relative;
-  overflow: hidden;
+.scrollArrowWrapper {
+  display: flex;
+  align-items: center;
+  width: 48px;
 }
 
-.scrollDot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 15px;
-  height: 1px;
-  background: var(--gold);
-  animation: scrollAnim 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+.scrollArrow {
+  animation: arrowSlide 4s ease-in-out infinite;
 }
 
-@keyframes scrollAnim {
-  0% { transform: translateX(-20px); }
-  100% { transform: translateX(65px); }
+@keyframes arrowSlide {
+  0% { transform: translateX(0px); opacity: 0.6; }
+  50% { transform: translateX(6px); opacity: 1; }
+  100% { transform: translateX(0px); opacity: 0.6; }
 }
 
 /* Simple & Chic Minimalist Background */
@@ -262,6 +270,14 @@
   }
   .name {
     font-size: 20vw;
+    margin-bottom: 12px;
+  }
+  .subheadline {
+    font-size: 18px;
+    margin-top: -4px;
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+    padding: 0 16px;
   }
   .bottom {
     gap: 32px;

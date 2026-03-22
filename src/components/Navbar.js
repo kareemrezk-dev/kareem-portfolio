@@ -12,6 +12,17 @@ export default function Navbar({ goTo, current }) {
       </a>
       <div className={styles.right}>
         <ul className={styles.links}>
+          {current > 0 && (
+            <li>
+              <a
+                href="#"
+                onClick={(e) => { e.preventDefault(); goTo(0) }}
+                className={current === 0 ? styles.active : ''}
+              >
+                Home
+              </a>
+            </li>
+          )}
           {['Work','About','Contact'].map((label, i) => (
             <li key={label}>
               <a

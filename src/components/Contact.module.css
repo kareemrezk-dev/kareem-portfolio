@@ -36,6 +36,7 @@
 .split {
   display: flex; gap: 80px; align-items: stretch; justify-content: space-between;
   width: 100%; max-width: 1200px;
+  margin: auto 0; /* Distributes extra vertical space evenly, pushing layout to middle */
 }
 .left {
   display: flex; flex-direction: column; align-items: flex-start; gap: 36px;

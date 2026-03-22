@@ -1,6 +1,5 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { useTheme } from '../context/ThemeContext'
 import styles from './Hero.module.css'
 import CairoTime from './CairoTime'
@@ -35,27 +34,21 @@ export default function Hero({ isActive, onNext }) {
 
   return (
     <div className={`${styles.slide} ${isActive ? styles.active : ''} ${isLight ? styles.slideLight : ''}`}>
-      {/* Mobile Background Orbs */}
-      <div className={styles.mobileOrbs}>
-        <div className={styles.orb1} />
-        <div className={styles.orb2} />
-        <div className={styles.orb3} />
+      
+      {/* Simple & Chic Animated Ambient Glow (Scattered) */}
+      <div className={styles.ambientBg}>
+        <div className={styles.breathingGlow1} />
+        <div className={styles.breathingGlow2} />
+        <div className={styles.grainOverlay} />
       </div>
-      {/* Ripple Animation Container */}
+
+      {/* Ripple Animation Container (Theme toggle effect) */}
       {ripples.map(r => (
         <div key={r.id} className={styles.rippleContainer}>
           <div className={styles.rippleRing} style={{ animationDelay: '0s' }} />
           <div className={styles.rippleRing} style={{ animationDelay: '0.8s' }} />
         </div>
       ))}
-      {/* Dark image */}
-      <div className={`${styles.imgWrap} ${isLight ? styles.imgWrapHidden : ''}`}>
-        <Image src="/kareem.png" alt="Kareem Rezk" fill className={styles.img} priority />
-      </div>
-      {/* Light image */}
-      <div className={`${styles.imgWrap} ${!isLight ? styles.imgWrapHidden : ''}`}>
-        <Image src="/kareem-light.png" alt="Kareem Rezk" fill className={styles.imgLight} priority />
-      </div>
 
       <div className={`${styles.overlay} ${isLight ? styles.overlayLight : ''}`} />
       
@@ -78,8 +71,6 @@ export default function Hero({ isActive, onNext }) {
           Kareem<em>Rezk</em>
         </div>
 
-
-
         <div className={styles.bottom}>
           <div className={styles.rolesAndBadge}>
             <CairoTime />
@@ -94,4 +85,3 @@ export default function Hero({ isActive, onNext }) {
     </div>
   )
 }
-

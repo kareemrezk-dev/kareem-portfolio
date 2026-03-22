@@ -1,3 +1,5 @@
+'use client'
+import { useRef, useEffect } from 'react'
 import styles from './Contact.module.css'
 import WordReveal from './WordReveal'
 
@@ -34,8 +36,29 @@ const socials = [
 ]
 
 export default function Contact({ isActive }) {
+  const contentRef = useRef(null)
+
+  // Allow vertical scrolling inside this slide — only pass wheel events
+  // to the global slider handler when content is at top/bottom boundary
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (!isActive || !contentRef.current) return
+      const { scrollTop, scrollHeight, clientHeight } = contentRef.current
+      const isScrollable = scrollHeight > clientHeight
+      if (!isScrollable) return
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1
+      const isAtTop = scrollTop <= 0
+      if ((e.deltaY > 0 && !isAtBottom) || (e.deltaY < 0 && !isAtTop)) {
+        e.stopPropagation()
+      }
+    }
+    const el = contentRef.current
+    if (el) el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => { if (el) el.removeEventListener('wheel', handleWheel) }
+  }, [isActive])
+
   return (
-    <div className={`${styles.slide} ${isActive ? styles.active : ''}`}>
+    <div className={`${styles.slide} ${isActive ? styles.active : ''}`} ref={contentRef}>
       <div className={styles.bg} />
       <div className={styles.content}>
         <div className={styles.label}>

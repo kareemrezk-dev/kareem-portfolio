@@ -15,25 +15,15 @@ export default function PortfolioSlider({ projects = [], initialSlide = 0 }) {
   const [current, setCurrent] = useState(initialSlide);
   const busy = useRef(false);
 
-  const goTo = useCallback(
-    (n) => {
-      if (busy.current || n === current || n < 0 || n >= TOTAL) return;
-      busy.current = true;
-      setCurrent(n);
-      setTimeout(() => {
-        busy.current = false;
-      }, 900);
-    },
-    [current],
-  );
+  const goTo = useCallback((n) => {
+    if (busy.current || n === current || n < 0 || n >= TOTAL) return;
+    busy.current = true;
+    setCurrent(n);
+    setTimeout(() => { busy.current = false; }, 900);
+  }, [current]);
 
   useEffect(() => {
-    // Force native scroll restoration off
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    
-    // If the URL has ?slide=X, clean it up so a subsequent refresh starts at Hero (0)
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const url = new URL(window.location);
     if (url.searchParams.has('slide')) {
       url.searchParams.delete('slide');
@@ -43,23 +33,14 @@ export default function PortfolioSlider({ projects = [], initialSlide = 0 }) {
 
   // Wheel
   useEffect(() => {
-    let acc = 0,
-      timer = null;
-      
-    // Guard to prevent trackpad inertia from previous page/refresh 
-    // from instantly triggering a slide change
+    let acc = 0, timer = null;
     let isReady = false;
-    const readyTimer = setTimeout(() => {
-      isReady = true;
-    }, 600);
-
+    const readyTimer = setTimeout(() => { isReady = true; }, 600);
     const onWheel = (e) => {
-      // Always prevent default to lock native scrolling
+      // NOTE: preventDefault disables vertical scrolling completely on desktop where wheel happens
+      // If we remove preventDefault, the user scrolls page but slider triggers
       e.preventDefault();
-      
-      // Ignore scroll events right after load
       if (!isReady) return;
-
       acc += e.deltaX || e.deltaY;
       clearTimeout(timer);
       timer = setTimeout(() => {
@@ -71,8 +52,7 @@ export default function PortfolioSlider({ projects = [], initialSlide = 0 }) {
     window.addEventListener('wheel', onWheel, { passive: false });
     return () => {
       window.removeEventListener('wheel', onWheel);
-      clearTimeout(readyTimer);
-      clearTimeout(timer);
+      clearTimeout(readyTimer); clearTimeout(timer);
     };
   }, [current, goTo]);
 
@@ -86,25 +66,43 @@ export default function PortfolioSlider({ projects = [], initialSlide = 0 }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [current, goTo]);
 
-  // Touch
+  // Touch — direction-lock: first significant movement decides scroll vs swipe
   useEffect(() => {
     let tx = 0, ty = 0;
+    let direction = null; // null → undecided, 'v' → vertical scroll, 'h' → horizontal swipe
+
     const onStart = (e) => {
       tx = e.touches[0].clientX;
       ty = e.touches[0].clientY;
+      direction = null;
     };
+
+    const onMove = (e) => {
+      if (direction) return; // already locked
+      const dx = Math.abs(e.touches[0].clientX - tx);
+      const dy = Math.abs(e.touches[0].clientY - ty);
+      // Lock direction after 10px of movement
+      if (dx > 10 || dy > 10) {
+        direction = dx > dy ? 'h' : 'v';
+      }
+    };
+
     const onEnd = (e) => {
+      // Only navigate slides when direction locked to horizontal
+      if (direction !== 'h') return;
       const dx = tx - e.changedTouches[0].clientX;
-      const dy = ty - e.changedTouches[0].clientY;
-      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (Math.abs(dx) > 60) {
         if (dx > 0) goTo(current + 1);
         else goTo(current - 1);
       }
     };
+
     window.addEventListener('touchstart', onStart, { passive: true });
+    window.addEventListener('touchmove', onMove, { passive: true });
     window.addEventListener('touchend', onEnd, { passive: true });
     return () => {
       window.removeEventListener('touchstart', onStart);
+      window.removeEventListener('touchmove', onMove);
       window.removeEventListener('touchend', onEnd);
     };
   }, [current, goTo]);

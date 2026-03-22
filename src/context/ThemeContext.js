@@ -4,12 +4,14 @@ import { createContext, useContext, useState, useEffect } from 'react'
 const ThemeContext = createContext()
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') || 'dark'
-    }
-    return 'dark'
-  })
+  // Always initialize with 'dark' to guarantee matching SSR HTML during hydration
+  const [theme, setTheme] = useState('dark')
+
+  useEffect(() => {
+    // Safely retrieve theme from localStorage after mount
+    const savedTheme = localStorage.getItem('theme') || 'dark'
+    setTheme(savedTheme)
+  }, [])
 
   useEffect(() => {
     document.body.classList.toggle('light', theme === 'light')

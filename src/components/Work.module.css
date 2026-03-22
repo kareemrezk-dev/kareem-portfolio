@@ -1,6 +1,6 @@
 .slide {
   width: 25%; height: 100%;
-  position: relative; overflow: hidden; flex-shrink: 0;
+  position: relative; overflow-y: auto; flex-shrink: 0;
 }
 .bg {
   position: absolute; inset: 0;
@@ -191,8 +191,9 @@
 
 @media (max-width: 640px) {
   .content { 
-    display: block; 
-    padding: 90px 22px 60px; 
+    display: block;
+    margin: 0;
+    padding: 90px 22px 140px; 
     overflow-y: auto; 
     -webkit-overflow-scrolling: touch; 
   }

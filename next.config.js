@@ -8,5 +8,13 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/pricing',
+        destination: '/pricing.html',
+      },
+    ]
+  },
 }
 module.exports = nextConfig

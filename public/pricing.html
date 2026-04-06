@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كريم رزق — خدمات رقمية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #c8a86a;
+  --gold-light: #e2c98a;
+  --dark: #0a0a0a;
+  --dark2: #111111;
+  --dark3: #161616;
+  --card: #131313;
+  --border: #1e1e1e;
+  --gray: #888888;
+  --gray2: #555555;
+  --white: #f0ede6;
+  --white2: #c8c4bc;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--white);
+  font-family: 'Cairo', sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+  direction: rtl;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4 { font-family: 'Tajawal', sans-serif; line-height: 1.25; }
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section { padding: 80px 0; }
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-box {
+  width: 38px;
+  height: 38px;
+  background: var(--gold);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Tajawal', serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--dark);
+  letter-spacing: -0.5px;
+}
+
+.nav-name {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--white);
+}
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 9px 20px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--gold-light); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; left: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,106,0.06);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px; right: -150px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(200,168,106,0.06);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200,168,106,0.1);
+  border: 1px solid rgba(200,168,106,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero-headline {
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 8px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.hero-headline .gold { color: var(--gold); }
+
+.hero-sub {
+  font-size: clamp(18px, 2.5vw, 24px);
+  color: var(--gray);
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-sub strong { color: var(--white2); font-weight: 600; }
+
+.hero-support {
+  font-size: 14px;
+  color: var(--gray2);
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+
+.hero-support::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.btn-primary {
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-stats {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeUp 0.6s 0.5s ease both;
+}
+
+.hero-stat {
+  background: var(--dark2);
+  padding: 24px 20px;
+  text-align: center;
+}
+
+.stat-num {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--gray);
+  font-weight: 400;
+}
+
+/* ── HERO VERSIONS TABS ── */
+.hero-versions {
+  background: var(--dark2);
+  border-bottom: 1px solid var(--border);
+  padding: 60px 0;
+}
+
+.versions-label {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray2);
+  margin-bottom: 32px;
+}
+
+.version-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.vtab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gray);
+  font-family: 'Cairo', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.vtab.active, .vtab:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--dark);
+}
+
+.version-content { display: none; }
+.version-content.active { display: block; }
+
+.version-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.version-card .v-headline {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.version-card .v-headline .gold { color: var(--gold); }
+
+.version-card .v-sub {
+  font-size: 16px;
+  color: var(--gray);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.version-card .v-support {
+  font-size: 13px;
+  color: var(--gray2);
+  font-style: italic;
+}
+
+/* ── VALUE PROP ── */
+.value-section {
+  background: var(--gold);
+  padding: 70px 0;
+}
+
+.value-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.value-label { color: rgba(10,10,10,0.5); }
+
+.value-heading {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 900;
+  color: var(--dark);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.value-body {
+  font-size: 16px;
+  color: rgba(10,10,10,0.75);
+  line-height: 1.8;
+}
+
+.value-points {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.value-point {
+  background: rgba(10,10,10,0.08);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.vp-icon {
+  width: 36px; height: 36px;
+  background: var(--dark);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.vp-text h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 3px;
+}
+.vp-text p {
+  font-size: 13px;
+  color: rgba(10,10,10,0.65);
+  line-height: 1.5;
+}
+
+/* ── SERVICES ── */
+.services-section { background: var(--dark3); }
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.section-sub {
+  font-size: 14px;
+  color: var(--gray);
+  max-width: 260px;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 100%; height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s;
+}
+
+.service-card:hover {
+  border-color: rgba(200,168,106,0.3);
+  transform: translateY(-3px);
+}
+.service-card:hover::before { transform: scaleX(1); }
+
+.svc-num {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--gray2);
+  font-family: 'Cairo', sans-serif;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.svc-icon {
+  width: 48px; height: 48px;
+  background: rgba(200,168,106,0.08);
+  border: 1px solid rgba(200,168,106,0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.svc-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.svc-desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.svc-result {
+  font-size: 13px;
+  color: var(--gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.svc-result::before {
+  content: '→';
+  font-size: 12px;
+}
+
+.services-micro {
+  margin-top: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray2);
+  padding: 16px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.services-micro strong { color: var(--white2); }
+
+/* ── PACKAGES ── */
+.packages-section { background: var(--dark2); }
+
+.pkg-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+
+.pkg-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  position: relative;
+  transition: all 0.25s;
+}
+
+.pkg-card.featured {
+  background: var(--dark3);
+  border: 1.5px solid var(--gold);
+  transform: translateY(-8px);
+}
+
+.pkg-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.pkg-badge.starter { background: var(--dark); color: var(--gray); border: 1px solid var(--border); }
+.pkg-badge.popular { background: var(--gold); color: var(--dark); }
+.pkg-badge.premium { background: var(--dark); color: var(--gold); border: 1px solid rgba(200,168,106,0.3); }
+
+.pkg-position {
+  font-size: 12px;
+  color: var(--gray2);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.pkg-name {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.pkg-name-ar {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+.pkg-price {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.pkg-currency {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 6px;
+}
+
+.pkg-desc {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 20px;
+  line-height: 1.65;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.pkg-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.pkg-features li {
+  font-size: 13px;
+  color: #999;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.pkg-features li::before {
+  content: '—';
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.pkg-suitable {
+  font-size: 11.5px;
+  color: var(--gray2);
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 6px;
+  border-right: 2px solid var(--gold);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.pkg-cta {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.pkg-cta.outline {
+  border: 1px solid var(--border);
+  color: var(--gray);
+}
+.pkg-cta.outline:hover { border-color: var(--gold); color: var(--gold); }
+
+.pkg-cta.solid {
+  background: var(--gold);
+  color: var(--dark);
+}
+.pkg-cta.solid:hover { background: var(--gold-light); }
+
+.pkg-micro {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--gray2);
+}
+.pkg-micro strong { color: var(--white2); }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: var(--dark3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 0;
+}
+
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 40px 0;
+}
+
+.cta-line {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: 15px;
+  color: var(--white2);
+  font-weight: 600;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-align: right;
+}
+
+.cta-line:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateX(-3px);
+}
+
+/* ── CONTACT ── */
+.contact-section { padding: 80px 0; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.contact-left h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.contact-left p {
+  font-size: 15px;
+  color: var(--gray);
+  margin-bottom: 32px;
+  line-height: 1.7;
+}
+
+.contact-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.contact-card:hover {
+  border-color: var(--gold);
+  transform: translateX(-3px);
+}
+
+.contact-icon {
+  width: 46px; height: 46px;
+  background: rgba(200,168,106,0.1);
+  border: 1px solid rgba(200,168,106,0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.contact-info label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray2);
+  margin-bottom: 3px;
+}
+
+.contact-info span {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.contact-right {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px 32px;
+}
+
+.contact-right h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.contact-right .sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 24px;
+}
+
+.contact-micro {
+  margin-top: 16px;
+  font-size: 12px;
+  color: var(--gray2);
+  text-align: center;
+}
+
+.contact-btn {
+  display: block;
+  width: 100%;
+  background: var(--gold);
+  color: var(--dark);
+  text-align: center;
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  font-family: 'Cairo', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-top: 24px;
+}
+.contact-btn:hover { background: var(--gold-light); }
+
+.trust-points {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.trust-point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--gray);
+}
+
+.trust-point::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray2);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  section { padding: 56px 0; }
+
+  .hero { min-height: auto; padding: 100px 0 60px; }
+
+  .hero-stats { grid-template-columns: 1fr; }
+
+  .value-inner { grid-template-columns: 1fr; gap: 32px; }
+
+  .services-grid { grid-template-columns: 1fr; }
+
+  .pkg-grid { grid-template-columns: 1fr; }
+  .pkg-card.featured { transform: none; }
+
+  .cta-grid { grid-template-columns: 1fr; }
+
+  .contact-grid { grid-template-columns: 1fr; }
+
+  .section-header { flex-direction: column; align-items: flex-start; }
+  .section-sub { max-width: 100%; text-align: right; }
+
+  .version-card { padding: 24px 20px; }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+  .nav-cta { font-size: 12px; padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-box">KR</div>
+      <span class="nav-name">كريم رزق</span>
+    </a>
+    <a href="#contact" class="nav-cta">ابدأ دلوقتي</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">متاح للشغل · خدمات رقمية احترافية</div>
+
+      <h1 class="hero-headline">
+        مشروعك مش<br>
+        <span class="gold">موجود أونلاين؟</span><br>
+        إنت بتخسر عملاء كل يوم.
+      </h1>
+
+      <p class="hero-sub">
+        بنبني لك <strong>موقع + سوشيال + إعلانات</strong> — مش بس شكل كويس،
+        <br>لكن ماكينة بتجيب عملاء حقيقيين.
+      </p>
+
+      <p class="hero-support">
+        خبرة في العقارات، العيادات، المتاجر، والشركات الناشئة في مصر
+      </p>
+
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">احجز استشارة مجانية</a>
+        <a href="#services" class="btn-secondary">شوف الخدمات</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">خدمات متكاملة</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">3</span>
+          <span class="stat-label">باكدجات جاهزة</span>
+        </div>
+        <div class="hero-stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">نتائج قابلة للقياس</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── HERO VERSIONS ── -->
+<div class="hero-versions">
+  <div class="container">
+    <p class="versions-label">3 نسخ من الـ Headline — اختار اللي يعجبك</p>
+
+    <div class="version-tabs">
+      <button class="vtab active" onclick="showVersion(0)">النسخة الأولى</button>
+      <button class="vtab" onclick="showVersion(1)">النسخة التانية</button>
+      <button class="vtab" onclick="showVersion(2)">النسخة التالتة</button>
+    </div>
+
+    <div class="version-content active" id="v0">
+      <div class="version-card">
+        <p class="v-headline">
+          مشروعك مش موجود أونلاين؟<br>
+          <span class="gold">إنت بتخسر عملاء كل يوم.</span>
+        </p>
+        <p class="v-sub">بنبنيلك حضور رقمي كامل — موقع + سوشيال + إعلانات — تحوّل المتصفح لعميل.</p>
+        <p class="v-support">✦ لمحلات، عيادات، مطاعم، وشركات ناشئة في مصر</p>
+      </div>
+    </div>
+
+    <div class="version-content" id="v1">
+      <div class="version-card">
+        <p class="v-headline">
+          <span class="gold">كل يوم من غير موقع</span><br>
+          هو يوم هدية لمنافسيك.
+        </p>
+        <p class="v-sub">موقع + سوشيال + إعلانات مدروسة — دي مش تكلفة، دي استثمار بيرجع عليك.</p>
+        <p class="v-support">✦ بنشتغل مع أصحاب المشاريع اللي عايزين نمو حقيقي، مش مجرد شكل كويس.</p>
+      </div>
+    </div>
+
+    <div class="version-content" id="v2">
+      <div class="version-card">
+        <p class="v-headline">
+          المشاريع الكبيرة<br>
+          <span class="gold">بدأت صغيرة — وبدأت أونلاين.</span>
+        </p>
+        <p class="v-sub">حوّل مشروعك لماكينة بتجيب عملاء على مدار الساعة — من غير ما تقعد تتابع.</p>
+        <p class="v-support">✦ استراتيجية رقمية متكاملة مصممة خصيصاً للسوق المصري.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── VALUE PROP ── -->
+<section class="value-section">
+  <div class="container">
+    <div class="value-inner">
+      <div>
+        <span class="section-label" style="color:rgba(10,10,10,0.5)">ليه أنا؟</span>
+        <h2 class="value-heading">
+          مش ببيعلك خدمة —<br>بحقق لك نتيجة.
+        </h2>
+        <p class="value-body">
+          أغلب أصحاب المشاريع بيدفعوا تمن موقع أو صفحة سوشيال وما بيشوفوش أي فرق في المبيعات.
+          السبب مش في الخدمة — السبب في غياب الاستراتيجية.
+          <br><br>
+          أنا بشتغل على المنظومة كلها — موقع يبيع، محتوى يجذب، وإعلانات تستهدف العميل الصح
+          — وكل ده بعين السوق المصري، مش كوبي-باست من أمريكا.
+        </p>
+      </div>
+
+      <div class="value-points">
+        <div class="value-point">
+          <div class="vp-icon">🎯</div>
+          <div class="vp-text">
+            <h4>نتائج مش وعود</h4>
+            <p>بنشتغل على KPIs واضحة — عملاء، مبيعات، طلبات. مش likes فاضية.</p>
+          </div>
+        </div>
+        <div class="value-point">
+          <div class="vp-icon">🇪🇬</div>
+          <div class="vp-text">
+            <h4>فاهم السوق المصري</h4>
+            <p>خبرة حقيقية مع عقارات، عيادات، متاجر، ومطاعم في مصر.</p>
+          </div>
+        </div>
+        <div class="value-point">
+          <div class="vp-icon">⚡</div>
+          <div class="vp-text">
+            <h4>تسليم سريع ومنظم</h4>
+            <p>مواعيد واضحة، تواصل مستمر، ومحدش بيختفي بعد ما ياخد الفلوس.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── SERVICES ── -->
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-label">الخدمات</span>
+        <h2 class="section-title">كل اللي محتاجه<br>عندي.</h2>
+      </div>
+      <p class="section-sub">مش agency وبتاخد وقت — بشتغل معاك مباشرة وبتسلم بسرعة.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="svc-num">01</span>
+        <div class="svc-icon">🌐</div>
+        <h3 class="svc-title">موقع يبيع — مش بس يتفرج عليه</h3>
+        <p class="svc-desc">
+          الزبون اللي بيدور عليك أونلاين — لازم يلاقيك وتعجبه من أول ثانية.
+          بصمم وأبرمج مواقع سريعة، متجاوبة، ومقنعة — من الـ Landing Page
+          للمتجر الكامل.
+        </p>
+        <p class="svc-result">موقع بيحول زوار لعملاء يدفعوا</p>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-num">02</span>
+        <div class="svc-icon">📱</div>
+        <h3 class="svc-title">تطبيق بيخلي عميلك مش قادر يسيبك</h3>
+        <p class="svc-desc">
+          لو مشروعك وصل لمرحلة إنه يستاهل App — ابنيه صح من الأول.
+          iOS + Android بأداء عالي وتجربة مستخدم تخلي العميل يرجع كل يوم.
+        </p>
+        <p class="svc-result">حضور دائم في موبايل عميلك</p>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-num">03</span>
+        <div class="svc-icon">📲</div>
+        <h3 class="svc-title">سوشيال ميديا تبني براند — مش بس بوستات</h3>
+        <p class="svc-desc">
+          الناس بتحكم على مشروعك من أول بوست تشوفه.
+          بدير لك الصفحات بمحتوى مقنع، بتصميم يميزك، وبخطة واضحة —
+          مش عشوائية.
+        </p>
+        <p class="svc-result">متابعين حقيقيين بيتحولوا لعملاء</p>
+      </div>
+
+      <div class="service-card">
+        <span class="svc-num">04</span>
+        <div class="svc-icon">🎯</div>
+        <h3 class="svc-title">إعلانات بتوصل للعميل الصح — مش بتحرق فلوس</h3>
+        <p class="svc-desc">
+          Facebook & Instagram Ads بدراسة جمهور صح واستهداف دقيق.
+          كل جنيه بتنفقه لازم يرجع عليك أكتر — وده اللي بشتغل عليه.
+        </p>
+        <p class="svc-result">إعلانات بـ ROI واضح وقابل للقياس</p>
+      </div>
+
+    </div>
+
+    <div class="services-micro">
+      <strong>مش متأكد إيه اللي تحتاجه؟</strong> — ابعتلي وهنحدد سوا بالظبط إيه اللي هيفرق مع مشروعك.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── PACKAGES ── -->
+<section class="packages-section" id="packages">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <span class="section-label">الباكدجات</span>
+        <h2 class="section-title">اختار اللي<br>يناسبك.</h2>
+      </div>
+      <p class="section-sub">كل الأسعار قابلة للتفاوض حسب احتياجك الفعلي.</p>
+    </div>
+
+    <div class="pkg-grid">
+
+      <!-- STARTER -->
+      <div class="pkg-card">
+        <span class="pkg-badge starter">Starter</span>
+        <p class="pkg-position">للي بادي وعايز يبدأ صح</p>
+        <h3 class="pkg-name">حضور رقمي</h3>
+        <p class="pkg-name-ar">أول خطوة بجد</p>
+        <p class="pkg-price">8,000 – 12,000</p>
+        <p class="pkg-currency">جنيه</p>
+        <p class="pkg-desc">
+          مش بس موقع — ده بداية حضورك الرقمي الكامل.
+          مناسب لمن لسه بيبني وعايز بداية صح من غير تعقيد.
+        </p>
+        <ul class="pkg-features">
+          <li>Landing Page احترافية (5-7 سكشن)</li>
+          <li>هوية بصرية بسيطة (لوجو + ألوان + فونت)</li>
+          <li>تجهيز صفحات السوشيال</li>
+          <li>تسليم خلال 7 أيام</li>
+        </ul>
+        <div class="pkg-suitable">مناسب لـ: المحلات، الفريلانسرز، الخدمات المحلية</div>
+        <a href="#contact" class="pkg-cta outline">ابدأ بيه</a>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="pkg-card featured">
+        <span class="pkg-badge popular">⭐ الأكثر طلباً</span>
+        <p class="pkg-position">للمشروع اللي عايز ينمو فعلاً</p>
+        <h3 class="pkg-name">نمو رقمي</h3>
+        <p class="pkg-name-ar">الخيار اللي بيفرق</p>
+        <p class="pkg-price">20,000 – 30,000</p>
+        <p class="pkg-currency">جنيه</p>
+        <p class="pkg-desc">
+          ده مش مجرد موقع — ده منظومة متكاملة.
+          موقع + هوية + سوشيال + إعلانات في باكدج واحد بسعر أقل من إنك توظف فريق كامل.
+        </p>
+        <ul class="pkg-features">
+          <li>موقع متكامل (Next.js أو WordPress)</li>
+          <li>هوية بصرية كاملة</li>
+          <li>إدارة سوشيال ميديا — شهر كامل</li>
+          <li>Meta Ads (setup + تشغيل) — 2 إعلانات</li>
+          <li>تقرير أداء شهري</li>
+        </ul>
+        <div class="pkg-suitable">مناسب لـ: المتاجر، العيادات، الشركات الصغيرة</div>
+        <a href="#contact" class="pkg-cta solid">اختاره دلوقتي</a>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="pkg-card">
+        <span class="pkg-badge premium">Premium</span>
+        <p class="pkg-position">للي عايز يكون رقم 1 في مجاله</p>
+        <h3 class="pkg-name">حضور متكامل</h3>
+        <p class="pkg-name-ar">للجادين بجد</p>
+        <p class="pkg-price">40,000 – 60,000</p>
+        <p class="pkg-currency">جنيه</p>
+        <p class="pkg-desc">
+          مشروع بجد محتاج حضور بجد.
+          منظومة رقمية شاملة — تبني البراند، تجيب عملاء، وتحافظ عليهم.
+        </p>
+        <ul class="pkg-features">
+          <li>موقع متقدم (متجر / كاتالوج / عقاري)</li>
+          <li>هوية بصرية احترافية كاملة</li>
+          <li>إدارة سوشيال 3 شهور</li>
+          <li>Meta Ads إدارة 3 شهور</li>
+          <li>موشن جرافيك / ريلز (4 قطع)</li>
+          <li>استراتيجية محتوى كاملة</li>
+        </ul>
+        <div class="pkg-suitable">مناسب لـ: العقارات، المتاجر الكبيرة، الشركات</div>
+        <a href="#contact" class="pkg-cta outline">تكلم عنه</a>
+      </div>
+
+    </div>
+
+    <p class="pkg-micro">
+      <strong>الأسعار قابلة للتفاوض</strong> — ومفيش حاجة اسمها "مش في الميزانية" قبل ما تتكلم معايا.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CTAs ── -->
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label">الـ CTA</span>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,36px); margin-bottom:8px;">
+      7 جمل تخلي العميل يتحرك فوراً
+    </h2>
+    <p style="font-size:13px; color:var(--gray2); margin-bottom:0;">انقر عليها لنسخها</p>
+
+    <div class="cta-grid">
+      <div class="cta-line" onclick="copyText(this)">ابعتلي دلوقتي وهنبدأ خلال 24 ساعة.</div>
+      <div class="cta-line" onclick="copyText(this)">خلي مشروعك يشتغل وانت نايم.</div>
+      <div class="cta-line" onclick="copyText(this)">كل يوم بيعدي من غير موقع — هو يوم مكسوب لمنافسك.</div>
+      <div class="cta-line" onclick="copyText(this)">استثمار واحد — نتائج طول السنة.</div>
+      <div class="cta-line" onclick="copyText(this)">مش لازم تبدأ بالكل — بس ابدأ.</div>
+      <div class="cta-line" onclick="copyText(this)">تكلمني دلوقتي — الاستشارة الأولى مجانية.</div>
+      <div class="cta-line" onclick="copyText(this)">مشروعك يستاهل أكتر من كده — خليه يتظهر صح.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── CONTACT ── -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <span class="section-label">تواصل معايا</span>
+        <h2>مش هتندم إنك اتصلت —<br>هتندم إنك أخرت.</h2>
+        <p>بتوصل لأي حد بيتكلم معايا خلال 24 ساعة — بكتب لك رأيي في مشروعك بصراحة ومن غير التزام.</p>
+
+        <div class="contact-cards">
+          <a href="https://wa.me/201117018055" class="contact-card" target="_blank">
+            <div class="contact-icon">💬</div>
+            <div class="contact-info">
+              <label>WhatsApp</label>
+              <span>01117018055</span>
+            </div>
+          </a>
+          <a href="mailto:kareem.rezk.we@gmail.com" class="contact-card">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-info">
+              <label>Email</label>
+              <span>kareem.rezk.we@gmail.com</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <h3>قبل ما تتواصل — اعرف إنك هتحصل على:</h3>
+        <p class="sub">استشارة مجانية بدون أي التزام</p>
+
+        <div class="trust-points">
+          <div class="trust-point">رأي صريح في وضعك الرقمي الحالي</div>
+          <div class="trust-point">خطة واضحة إيه اللي تعمله الأول</div>
+          <div class="trust-point">سعر مناسب لميزانيتك الفعلية</div>
+          <div class="trust-point">تواصل مستمر طول فترة الشغل</div>
+          <div class="trust-point">ما بختفيش بعد ما ياخد الفلوس 😄</div>
+        </div>
+
+        <a href="https://wa.me/201117018055" class="contact-btn" target="_blank">
+          ابعت على واتساب دلوقتي
+        </a>
+        <p class="contact-micro">عادةً بيرد خلال ساعتين · مفيش التزام</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-brand">كريم رزق — Kareem Rezk Digital Services</span>
+    <span class="footer-copy">© 2026 · كل الحقوق محفوظة</span>
+  </div>
+</footer>
+
+<script>
+function showVersion(index) {
+  document.querySelectorAll('.version-content').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.vtab').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+}
+
+function copyText(el) {
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = el.style.borderColor;
+    el.style.borderColor = 'var(--gold)';
+    el.style.color = 'var(--gold)';
+    setTimeout(() => {
+      el.style.borderColor = '';
+      el.style.color = '';
+    }, 800);
+  });
+}
+</script>
+
+</body>
+</html>

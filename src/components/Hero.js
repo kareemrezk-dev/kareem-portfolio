@@ -1,11 +1,15 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
+import { dictionaries } from '../lib/dictionaries'
 import styles from './Hero.module.css'
 import CairoTime from './CairoTime'
 
 export default function Hero({ isActive, onNext }) {
   const { theme } = useTheme()
+  const { lang } = useLanguage()
+  const dict = dictionaries[lang]
   const isLight = theme === 'light'
   
   const [ripples, setRipples] = useState([])
@@ -53,7 +57,7 @@ export default function Hero({ isActive, onNext }) {
       <div className={`${styles.overlay} ${isLight ? styles.overlayLight : ''}`} />
       
       <div className={styles.scrollHint}>
-        <span className={styles.scrollText}>Scroll</span>
+        <span className={styles.scrollText}>{dict.portfolio.scroll}</span>
         <div className={styles.scrollArrowWrapper}>
           <svg width="40" height="12" viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.scrollArrow}>
             <path d="M0 6H38M38 6L33 1M38 6L33 11" stroke="var(--gold, #C8A86A)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
@@ -63,10 +67,10 @@ export default function Hero({ isActive, onNext }) {
 
       <div className={styles.content}>
         <div className={styles.eyebrow}>
-          Cairo, Egypt
+          {dict.portfolio.location}
           <span className="availableBadge small">
             <span className="pulseDot small"></span>
-            Available for freelance
+            {dict.portfolio.freelance}
           </span>
         </div>
         <div className={styles.name}>
@@ -74,16 +78,16 @@ export default function Hero({ isActive, onNext }) {
         </div>
 
         <div className={styles.subheadline}>
-          I build websites that don&apos;t just look good &mdash; they convert.
+          {dict.portfolio.heroHeadline}
         </div>
 
         <div className={styles.bottom}>
           <div className={styles.rolesAndBadge}>
             <CairoTime />
             <div className={styles.roles}>
-              <div className={styles.role}><span className={styles.dot} />UI / UX Designer</div>
-              <div className={styles.role}><span className={styles.dot} />Front-End Developer</div>
-              <div className={styles.role}><span className={styles.dot} />Social Media Marketing</div>
+              <div className={styles.role}><span className={styles.dot} />{dict.portfolio.role1}</div>
+              <div className={styles.role}><span className={styles.dot} />{dict.portfolio.role2}</div>
+              <div className={styles.role}><span className={styles.dot} />{dict.portfolio.role3}</div>
             </div>
           </div>
         </div>

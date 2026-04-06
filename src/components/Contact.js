@@ -2,6 +2,8 @@
 import { useRef, useEffect } from 'react'
 import styles from './Contact.module.css'
 import WordReveal from './WordReveal'
+import { useLanguage } from '../context/LanguageContext'
+import { dictionaries } from '../lib/dictionaries'
 
 
 const socials = [
@@ -36,6 +38,8 @@ const socials = [
 ]
 
 export default function Contact({ isActive }) {
+  const { lang } = useLanguage()
+  const dict = dictionaries[lang]
   const contentRef = useRef(null)
 
   // Allow vertical scrolling inside this slide — only pass wheel events
@@ -62,17 +66,17 @@ export default function Contact({ isActive }) {
       <div className={styles.bg} />
       <div className={styles.content}>
         <div className={styles.label}>
-          <WordReveal text="Contact" isActive={isActive} delayStart={0.2} />
+          <WordReveal text={dict.portfolio.contactTitle} isActive={isActive} delayStart={0.2} />
         </div>
         
         <div className={styles.split}>
           <div className={styles.left}>
             <div className="availableBadge large" style={{marginBottom: '0', display: 'inline-flex'}}>
               <span className="pulseDot"></span>
-              Available for freelance
+              {dict.portfolio.freelance}
             </div>
 
-            <div className={styles.big}>Let&apos;s<br />work <em>together</em></div>
+            <div className={styles.big}>{dict.portfolio.contactReady}</div>
             
             <a href="mailto:kareem.rezk.go@gmail.com" className={styles.email}>
               kareem.rezk.go@gmail.com
@@ -89,11 +93,11 @@ export default function Contact({ isActive }) {
 
           <div className={styles.right}>
             <form className={styles.form} action="https://formspree.io/f/mpqyjzpk" method="POST">
-              <input type="text" name="name" className={styles.input} placeholder="Name" required />
-              <input type="email" name="email" className={styles.input} placeholder="Email" required />
-              <textarea name="message" className={styles.textarea} placeholder="Message" required rows="3"></textarea>
+              <input type="text" name="name" className={styles.input} placeholder={dict.portfolio.contactName} required />
+              <input type="email" name="email" className={styles.input} placeholder={dict.portfolio.contactEmail} required />
+              <textarea name="message" className={styles.textarea} placeholder={dict.portfolio.contactMsg} required rows="3"></textarea>
               <button type="submit" className={styles.submitBtn}>
-                Send Message
+                {dict.portfolio.contactSend}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -103,8 +107,8 @@ export default function Contact({ isActive }) {
           </div>
         </div>
         <div className={styles.footer}>
-          <span className={styles.ftName}>Kareem Rezk</span>
-          <span className={styles.ftCopy}>&copy; 2026 &mdash; Cairo, Egypt</span>
+          <span className={styles.ftName}>{dict.nav.name}</span>
+          <span className={styles.ftCopy}>{dict.portfolio.copyYear}</span>
         </div>
       </div>
     </div>

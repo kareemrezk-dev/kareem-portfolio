@@ -1,9 +1,13 @@
 'use client'
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
+import { dictionaries } from '../lib/dictionaries'
 import styles from './Navbar.module.css'
 
 export default function Navbar({ goTo, current }) {
   const { theme, toggleTheme } = useTheme()
+  const { lang, toggleLanguage } = useLanguage()
+  const dict = dictionaries[lang]
 
   return (
     <nav className={`${styles.nav} ${current === 1 ? styles.solidNav : ''}`}>
@@ -19,28 +23,37 @@ export default function Navbar({ goTo, current }) {
                 onClick={(e) => { e.preventDefault(); goTo(0) }}
                 className={current === 0 ? styles.active : ''}
               >
-                Home
+                {dict.portfolio.navHome}
               </a>
             </li>
           )}
-          {['Work','About','Contact'].map((label, i) => (
-            <li key={label}>
+          {[
+            { label: dict.portfolio.navWork, i: 1 },
+            { label: dict.portfolio.navAbout, i: 2 },
+            { label: dict.portfolio.navContact, i: 3 }
+          ].map(({ label, i }) => (
+            <li key={i}>
               <a
                 href="#"
-                onClick={(e) => { e.preventDefault(); goTo(i + 1) }}
-                className={current === i + 1 ? styles.active : ''}
+                onClick={(e) => { e.preventDefault(); goTo(i) }}
+                className={current === i ? styles.active : ''}
               >
                 {label}
               </a>
             </li>
           ))}
         </ul>
-        <button className={styles.themeBtn} onClick={toggleTheme}>
-          <div className={styles.track}>
-            <div className={`${styles.thumb} ${theme === 'light' ? styles.thumbOn : ''}`} />
-          </div>
-          <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
-        </button>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button className={styles.themeBtn} onClick={toggleLanguage} style={{ padding: '6px 12px', background: 'var(--gold)', color: '#000', borderRadius: '4px', border: 'none', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'inherit', fontSize: '13px' }}>
+            {dict.portfolio.langToggle}
+          </button>
+          <button className={styles.themeBtn} onClick={toggleTheme}>
+            <div className={styles.track}>
+              <div className={`${styles.thumb} ${theme === 'light' ? styles.thumbOn : ''}`} />
+            </div>
+            <span>{theme === 'light' ? dict.portfolio.themeDark : dict.portfolio.themeLight}</span>
+          </button>
+        </div>
       </div>
     </nav>
   )

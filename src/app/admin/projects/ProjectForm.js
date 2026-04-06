@@ -8,8 +8,10 @@ import styles from '../admin.module.css'
 export default function ProjectForm({ initial = {}, onSave }) {
   const [form, setForm] = useState({
     title: initial.title || '',
+    title_ar: initial.title_ar || '',
     slug: initial.slug || '',
     description: initial.description || '',
+    description_ar: initial.description_ar || '',
     role: initial.role || '',
     role_color: initial.role_color || '',
     year: initial.year || new Date().getFullYear().toString(),
@@ -97,7 +99,7 @@ export default function ProjectForm({ initial = {}, onSave }) {
       // Reset form if it is a new project insertion (determined by initial slug existence)
       if (!initial.id && !initial.slug) {
         setForm({
-          title: '', slug: '', description: '', role: '', role_color: '',
+          title: '', title_ar: '', slug: '', description: '', description_ar: '', role: '', role_color: '',
           year: new Date().getFullYear().toString(), tags: '', live_url: '',
           github_url: '', cover_image: '', gallery_images: [],
           featured: false, order_index: 0
@@ -119,6 +121,10 @@ export default function ProjectForm({ initial = {}, onSave }) {
           <input className={styles.formInput} value={form.title} onChange={handleTitleChange} placeholder="E-Commerce Dashboard" required/>
         </div>
         <div className={styles.formField}>
+          <label className={styles.formLabel}>Title (Arabic)</label>
+          <input className={styles.formInput} value={form.title_ar} onChange={e => set('title_ar', e.target.value)} placeholder="لوحة تحكم المتجر" dir="rtl" />
+        </div>
+        <div className={`${styles.formField} ${styles.full}`}>
           <label className={styles.formLabel}>{t.slugLabel}</label>
           <input className={styles.formInput} value={form.slug} onChange={e => set('slug', e.target.value)} placeholder="ecommerce-dashboard" required/>
           <span className={styles.formHint}>{t.urlHint}{form.slug || 'slug'}</span>
@@ -127,6 +133,10 @@ export default function ProjectForm({ initial = {}, onSave }) {
         <div className={`${styles.formField} ${styles.full}`}>
           <label className={styles.formLabel}>{t.descLabel}</label>
           <textarea className={styles.formTextarea} value={form.description} onChange={e => set('description', e.target.value)} placeholder={t.descPlaceholder}/>
+        </div>
+        <div className={`${styles.formField} ${styles.full}`}>
+          <label className={styles.formLabel}>Description (Arabic)</label>
+          <textarea className={styles.formTextarea} value={form.description_ar} onChange={e => set('description_ar', e.target.value)} placeholder="وصف المشروع" dir="rtl" />
         </div>
 
         <div className={styles.formField}>

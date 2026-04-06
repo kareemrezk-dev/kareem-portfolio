@@ -4,6 +4,8 @@ import styles from './About.module.css'
 import WordReveal from './WordReveal'
 import Image from 'next/image'
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
+import { dictionaries } from '../lib/dictionaries'
 
 
 const skills = ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'Responsive Design', 'Social Media Marketing']
@@ -11,6 +13,8 @@ const tools  = ['Figma', 'Illustrator', 'Photoshop', 'GitHub', 'Git', 'VS Code']
 
 export default function About({ isActive }) {
   const { theme } = useTheme()
+  const { lang } = useLanguage()
+  const dict = dictionaries[lang]
   const isLight = theme === 'light'
   const contentRef = useRef(null)
 
@@ -52,23 +56,23 @@ export default function About({ isActive }) {
 
           <div className={styles.textColumn}>
             <div className={styles.label}>
-              <WordReveal text="About" isActive={isActive} delayStart={0.2} />
+              <WordReveal text={dict.portfolio.aboutTitle} isActive={isActive} delayStart={0.2} />
             </div>
             <h2 className={styles.heading}>
-              <WordReveal text="Design that speaks " isActive={isActive} delayStart={0.3} />
-              <em><WordReveal text="clearly" isActive={isActive} delayStart={0.6} /></em>
+              <WordReveal text={dict.portfolio.aboutLine1} isActive={isActive} delayStart={0.3} />
+              <em><WordReveal text={dict.portfolio.aboutLine2} isActive={isActive} delayStart={0.6} /></em>
             </h2>
             <div className={styles.spacer}></div>
             <p className={styles.p}>
-              I&apos;m <strong>Kareem Rezk</strong>, a <strong>Front-End Developer</strong>, <strong>UI/UX Designer</strong>, and <strong>Social Media Specialist</strong> based in Egypt. I specialize in building modern, responsive websites and creating clean, user-focused digital experiences.
+              {dict.portfolio.aboutP1_1}<strong>Kareem Rezk</strong>{dict.portfolio.aboutP1_2}<strong>{dict.portfolio.role2}</strong>{dict.portfolio.aboutP1_3}<strong>{dict.portfolio.role1}</strong>{dict.portfolio.aboutP1_4}<strong>{dict.portfolio.role3}</strong>{dict.portfolio.aboutP1_5}
             </p>
             <p className={styles.p}>
-              My work combines development, design, and creative thinking to turn ideas into functional and visually engaging products.
+              {dict.portfolio.aboutP2}
             </p>
             <div className={styles.skillsWrap}>
               <div className={styles.group}>
                 <div className={styles.groupLabel}>
-                  <WordReveal text="Skills" isActive={isActive} delayStart={0.4} />
+                  <WordReveal text={dict.portfolio.aboutSkills} isActive={isActive} delayStart={0.4} />
                 </div>
                 <div className={styles.tags}>
                   {skills.map(s => <span key={s} className={styles.tag}>{s}</span>)}
@@ -77,7 +81,7 @@ export default function About({ isActive }) {
               <div className={styles.divider} />
               <div className={styles.group}>
                 <div className={styles.groupLabel}>
-                  <WordReveal text="Tools" isActive={isActive} delayStart={0.5} />
+                  <WordReveal text={dict.portfolio.aboutTools} isActive={isActive} delayStart={0.5} />
                 </div>
                 <div className={styles.tags}>
                   {tools.map(t => <span key={t} className={styles.tag}>{t}</span>)}

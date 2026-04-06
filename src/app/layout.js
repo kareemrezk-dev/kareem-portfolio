@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import Preloader from '../components/Preloader'
 import { ThemeProvider } from '../context/ThemeContext'
+import { LanguageProvider } from '../context/LanguageContext'
 
 export const metadata = {
   title: 'Kareem Rezk — UI/UX Designer & Front-End Developer',
@@ -46,10 +47,12 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body suppressHydrationWarning>
-        <ThemeProvider>
-          <Preloader />
-          {children}
-        </ThemeProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <Preloader />
+            {children}
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

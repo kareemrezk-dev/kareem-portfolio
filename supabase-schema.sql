@@ -20,6 +20,12 @@ create table projects (
   updated_at timestamp with time zone default now()
 );
 
+-- ADDED FOR i18n
+alter table projects 
+add column if not exists title_ar text,
+add column if not exists description_ar text;
+
+
 -- Enable Row Level Security
 alter table projects enable row level security;
 

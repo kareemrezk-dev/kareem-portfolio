@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './WorkGrid.module.css'
+import { useLanguage } from '../context/LanguageContext'
+import { dictionaries } from '../lib/dictionaries'
 
 /* ─── helpers ───────────────────────────────────────────── */
 function getCategoryClass(tag) {
@@ -56,12 +57,17 @@ function RevealCard({ children, delay = 0, scrollRoot }) {
 
 
 function FeaturedCard({ project, scrollRoot, compact = false }) {
+  const { lang } = useLanguage()
+  const dict = dictionaries[lang]
+  const title = lang === 'ar' && project.title_ar ? project.title_ar : project.title
+  const desc = lang === 'ar' && project.description_ar ? project.description_ar : project.description
+
   return (
     <RevealCard delay={0} scrollRoot={scrollRoot}>
       <Link href={`/work/${project.slug}`} className={styles.featuredCard} style={{ gridTemplateColumns: compact ? '5fr 4fr' : undefined }}>
         <div className={styles.featuredImageContainer}>
           {project.cover_image ? (
-            <Image src={project.cover_image} alt={project.title} fill className={styles.featuredImage} />
+            <Image src={project.cover_image} alt={title} fill className={styles.featuredImage} />
           ) : (
             <div className={styles.featuredImage} style={{ background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
           )}
@@ -69,17 +75,17 @@ function FeaturedCard({ project, scrollRoot, compact = false }) {
         <div className={styles.featuredContent}>
           <div className={styles.featuredBadge}>
             <span className={styles.featuredDot} />
-            Featured Project
+            {lang === 'ar' ? 'مشروع مميز' : 'Featured Project'}
           </div>
-          <h3 className={styles.featuredTitle}>{project.title}</h3>
-          <p className={styles.featuredDesc}>{project.description || 'No description provided.'}</p>
+          <h3 className={styles.featuredTitle}>{title}</h3>
+          <p className={styles.featuredDesc}>{desc || (lang === 'ar' ? 'لا يوجد وصف.' : 'No description provided.')}</p>
           <div className={styles.tagsWrap}>
             {(project.skills || []).map((skill, idx) => (
               <span key={idx} className={styles.skillTag}>{skill}</span>
             ))}
           </div>
           <div className={styles.readMore}>
-            View Case Study <span className={styles.arrow}>→</span>
+            {lang === 'ar' ? 'عرض دراسة الحالة' : 'View Case Study'} <span className={styles.arrow} style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none', display: 'inline-block' }}>→</span>
           </div>
         </div>
       </Link>
@@ -87,29 +93,33 @@ function FeaturedCard({ project, scrollRoot, compact = false }) {
   )
 }
 
+
 function ProjectCard({ project, index, scrollRoot }) {
-  const mainTag = (project.tags && project.tags.length > 0) ? project.tags[0] : 'Project'
+  const { lang } = useLanguage()
+  const title = lang === 'ar' && project.title_ar ? project.title_ar : project.title
+  const desc = lang === 'ar' && project.description_ar ? project.description_ar : project.description
+  const mainTag = (project.tags && project.tags.length > 0) ? project.tags[0] : (lang === 'ar' ? 'مشروع' : 'Project')
   return (
     <RevealCard delay={(index % 3) * 150} scrollRoot={scrollRoot}>
       <Link href={`/work/${project.slug}`} className={styles.card}>
         <div className={styles.imageContainer}>
           {project.cover_image ? (
-            <Image src={project.cover_image} alt={project.title} fill className={styles.image} />
+            <Image src={project.cover_image} alt={title} fill className={styles.image} />
           ) : (
             <div className={styles.image} style={{ background: '#111', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No Image</div>
           )}
         </div>
         <div className={styles.cardContent}>
           <span className={`${styles.category} ${getCategoryClass(mainTag)}`}>{mainTag}</span>
-          <h3 className={styles.cardTitle}>{project.title}</h3>
-          <p className={styles.cardDesc}>{project.description || 'No description provided.'}</p>
+          <h3 className={styles.cardTitle}>{title}</h3>
+          <p className={styles.cardDesc}>{desc || (lang === 'ar' ? 'لا يوجد وصف.' : 'No description provided.')}</p>
           <div className={styles.tagsWrap}>
             {(project.skills || []).map((skill, idx) => (
               <span key={idx} className={styles.skillTag}>{skill}</span>
             ))}
           </div>
           <div className={styles.readMore}>
-            Read Insight <span className={styles.arrow}>→</span>
+            {lang === 'ar' ? 'إقرأ المزيد' : 'Read Insight'} <span className={styles.arrow} style={{ transform: lang === 'ar' ? 'rotate(180deg)' : 'none', display: 'inline-block' }}>→</span>
           </div>
         </div>
       </Link>
@@ -132,16 +142,19 @@ export default function WorkGrid({ projects = [], scrollRoot, compact = false })
   })
   const CATEGORIES = ['All', ...Array.from(tagSet).sort()]
 
+  const { lang } = useLanguage()
+
   const [activeFilter, setActiveFilter] = useState('All')
   const [search, setSearch] = useState('')
 
   const filtered = projects
     .filter((p) => {
+      const pTitle = lang === 'ar' && p.title_ar ? p.title_ar : p.title
       const matchCat =
         activeFilter === 'All' ||
         (p.tags || []).some((t) => t.toLowerCase() === activeFilter.toLowerCase())
       const matchSearch =
-        search === '' || p.title.toLowerCase().includes(search.toLowerCase())
+        search === '' || pTitle.toLowerCase().includes(search.toLowerCase())
       return matchCat && matchSearch
     })
     .sort((a, b) => a.order_index - b.order_index)

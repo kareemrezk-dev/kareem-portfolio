@@ -9,7 +9,7 @@ async function getProjects() {
   const supabase = createClient(supabaseUrl, supabaseKey)
   const { data, error } = await supabase
     .from('projects')
-    .select('id, slug, title, description, tags, cover_image, order_index, featured')
+    .select('id, slug, title, title_ar, description, description_ar, tags, cover_image, order_index, featured')
     .order('order_index', { ascending: true })
 
   if (error) {

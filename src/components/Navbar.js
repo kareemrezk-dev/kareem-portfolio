@@ -42,6 +42,14 @@ export default function Navbar({ goTo, current }) {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href="/pricing"
+              className={current === -1 ? styles.active : ''}
+            >
+              {dict.portfolio.navPricing || 'Pricing'}
+            </a>
+          </li>
         </ul>
         <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
           <button className={styles.themeBtn} onClick={toggleLanguage} style={{ padding: '6px 12px', background: 'var(--gold)', color: '#000', borderRadius: '4px', border: 'none', fontWeight: 'bold', cursor: 'pointer', fontFamily: 'inherit', fontSize: '13px' }}>
